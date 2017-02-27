@@ -1,0 +1,11 @@
+{% extends 'Blog/base.html' %}
+{% block content %}
+<html>
+	<head>
+		<meta http-equiv="refresh" content="2;url={% url 'dashboard:index' %}">
+	</head>
+	<body>
+	Success! You are now logged in.
+	</body>
+</html>
+{% endblock content %}

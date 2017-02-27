@@ -1,0 +1,27 @@
+from django.http import HttpResponseRedirect
+from .forms import SignupForm, SignupForm2
+from django.shortcuts import render
+from django.urls import reverse
+from django.contrib.auth import login
+
+def index(request):
+	if request.method == "POST":
+		# create a new user.
+		form = SignupForm(request.POST)
+		form_birth = SignupForm2(request.POST)
+		if form.is_valid() and form_birth.is_valid():
+                    new_user = form.save(commit=False)	
+                    new_user.set_password(form.cleaned_data['password1'])
+                    new_user.save()
+                    new_user_birth = form_birth.save()
+                    new_user.is_active = True
+                    login(request, new_user)
+                    return HttpResponseRedirect(reverse('signup:success'))
+	else:
+		form = SignupForm()
+		form_birth = SignupForm2()
+
+	return render(request, 'signup/index.html', {'form': form, 'form_birth': form_birth})
+
+def success(request):
+	return render(request, 'signup/success.html')
