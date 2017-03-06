@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import timezone
 
 class Post(models.Model):
 	title = models.CharField(max_length=100)
@@ -9,7 +8,7 @@ class Post(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
 	def utc_to_local(self, utc_datetime):
-		return utc_datetime.replace(tzinfo=timezone.utc).astimezone(tz=None)
+		return utc_datetime.astimezone(tz=None)
 
 	def __str__(self):
 		date_time = self.utc_to_local(self.pub_date).strftime('%m-%d-%y %I:%M %p')
