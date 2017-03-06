@@ -1,7 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from posts.forms import PostForm
-from django.http import HttpResponseRedirect
-from django.urls import reverse
 
 def index(request):
 	# user has populated the form and is submitting a post. create the post.
@@ -12,7 +10,7 @@ def index(request):
 			new_post.user = request.user
 			new_post.save()
 			# redirect user to posts page.
-			return HttpResponseRedirect(reverse('posts:index'))
+			return redirect('posts:index')
 	else:
 		form = PostForm
 	return render(request, 'dashboard/index.html', {'form':form})
