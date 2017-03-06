@@ -8,5 +8,6 @@ class Post(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
 	def __str__(self):
-		return '%s \n %s \n %s \n\n' % (self.title, str(self.pub_date), self.body)
+		date_time = self.pub_date.strftime('%m-%d-%y %I:%M %p')
+		return '%s \n %s \n %s \n\n' % (self.title, date_time , self.body)
 	

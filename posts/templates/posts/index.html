@@ -1,6 +1,6 @@
 {% extends 'Blog/base.html' %}
 {% block content %}
-{% for post in username.post_set.all  %}
+{% for post in username.post_set.all reversed %}
 	{{ post|linebreaksbr }}	
 {% endfor %}
 {% endblock content%}
