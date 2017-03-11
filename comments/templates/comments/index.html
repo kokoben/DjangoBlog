@@ -1,0 +1,10 @@
+{% extends Blog/base.html %}
+{% block content %}
+<form action="" method="post">
+{% csrf token %}
+	<table>
+	{{form.as_table}}
+	</table>
+	<input type="submit", value="Chime in!">
+</form>
+{% endblock content %}

@@ -12,5 +12,5 @@ class Post(models.Model):
 
 	def __str__(self):
 		date_time = self.utc_to_local(self.pub_date).strftime('%m-%d-%y %I:%M %p')
-		return '%s \n %s \n %s \n\n' % (self.title, date_time , self.body)
+		return '%s \n %s \n\n' % (date_time , self.body)
 	

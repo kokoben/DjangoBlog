@@ -1,0 +1,13 @@
+{% extends 'Blog/base.html' %}
+{% block content %}
+{{ post.title|linebreaksbr }}<br>
+{{ post|linebreaksbr }}
+<form action="" method="post">
+	<h2>Comment:</h2>
+	{% csrf_token %}
+	<table>
+	{{form.as_table}}
+	</table>
+	<input type="submit" value="Post Comment!">
+</form>
+{% endblock content %}
