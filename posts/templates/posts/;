@@ -1,5 +1,0 @@
-{% extends 'Blog/base.html' %}
-{% block content %}
-{{ post.title|linebreaksbr }}
-{{ post|linebreaksbr }}
-{% endblock content %}

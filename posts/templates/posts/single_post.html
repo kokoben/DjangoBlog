@@ -1,7 +1,16 @@
 {% extends 'Blog/base.html' %}
 {% block content %}
+
+{# display post #}
 {{ post.title|linebreaksbr }}<br>
 {{ post|linebreaksbr }}
+
+{# display comments #}
+Comments:<br>
+{% for comment in comments %}
+	{{ comment.user }} says...<br>
+	{{ comment|linebreaksbr }}
+{% endfor %}
 {% if user.is_authenticated %}
 	<form action="" method="post">
 	{% csrf_token %}
