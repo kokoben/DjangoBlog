@@ -2,12 +2,16 @@
 {% block content %}
 {{ post.title|linebreaksbr }}<br>
 {{ post|linebreaksbr }}
-<form action="" method="post">
-	<h2>Comment:</h2>
+{% if user.is_authenticated %}
+	<form action="" method="post">
 	{% csrf_token %}
-	<table>
-	{{form.as_table}}
-	</table>
-	<input type="submit" value="Post Comment!">
-</form>
+	<h2>Comment:</h2>
+		<table>
+		{{form.as_table}}
+		</table>
+		<input type="submit", value="Chime in!">
+	</form>
+{% else %}
+Log in to comment!
+{% endif %}
 {% endblock content %}

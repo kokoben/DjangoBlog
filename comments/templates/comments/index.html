@@ -1,10 +1,14 @@
 {% extends Blog/base.html %}
 {% block content %}
-<form action="" method="post">
-{% csrf token %}
-	<table>
-	{{form.as_table}}
-	</table>
-	<input type="submit", value="Chime in!">
-</form>
+	{% if user.is_authenticated %}
+	<form action="" method="post">
+	{% csrf_token %}
+		<table>
+		{{form.as_table}}
+		</table>
+		<input type="submit", value="Chime in!">
+	</form>
+	{% else %}
+	<p>Please log in to comment.</p>
+	{% endif %}
 {% endblock content %}
