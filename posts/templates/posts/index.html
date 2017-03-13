@@ -3,6 +3,6 @@
 {% for post in username.post_set.all reversed %}
 	<a href={% url 'posts:display-post' username=username post_number=post.id  %}>{{ post.title|linebreaksbr }}</a> <br>
 	{{ post|linebreaksbr }}	
-	{{ post.num_comments }} comments
+	{{ post.num_comments }} comments<br><br>
 {% endfor %}
 {% endblock content%}
