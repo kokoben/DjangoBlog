@@ -10,6 +10,7 @@ def index(request, username):
 
 def displayPost(request, username, post_number):
 	post = Post.objects.get(user=User.objects.get(username=username), id=post_number)
+	num_comments = post.num_comments
 	comments = Comment.objects.filter(post=post)
 
 	# generate and handle comment form.
@@ -19,13 +20,15 @@ def displayPost(request, username, post_number):
 			comment = form.save(commit=False)
 			comment.user = request.user
 			comment.post = post
+			comment.post.num_comments += 1
+			comment.post.save()
 			comment.save()
 			return redirect('posts:display-post', username=username, post_number=post_number)
 		
 	else:
 		form = CommentForm()
 
-	return render(request, 'posts/single_post.html', {'post': post, 'comments':comments, 'form': form})
+	return render(request, 'posts/single_post.html', {'post': post, 'comments':comments, 'num_comments':num_comments, 'form': form})
 
 def archive(request, username=None):
     return render(request, 'posts/archive.html')

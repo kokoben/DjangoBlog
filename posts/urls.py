@@ -11,7 +11,7 @@ extra_patterns = [
 ]
 
 urlpatterns = [
-	url(r'^$', views.UserRedirectView.as_view(), name='index'),
+	url(r'^$', views.UserRedirectView.as_view()),
 	url(r'^posts/', include(extra_patterns)),
 	url(r'^archive/$', views.archive, name='archive')
 ]

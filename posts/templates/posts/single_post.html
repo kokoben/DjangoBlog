@@ -1,14 +1,13 @@
 {% extends 'Blog/base.html' %}
 {% block content %}
-
 {# display post #}
 {{ post.title|linebreaksbr }}<br>
 {{ post|linebreaksbr }}
 
 {# display comments #}
-Comments:<br>
+{{ num_comments }} Comments:<br>
 {% for comment in comments %}
-	{{ comment.user }} says...<br>
+	Posted by {{ comment.user }} on 
 	{{ comment|linebreaksbr }}
 {% endfor %}
 {% if user.is_authenticated %}
