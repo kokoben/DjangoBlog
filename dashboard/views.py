@@ -9,8 +9,7 @@ def index(request):
 			new_post = form.save(commit=False)
 			new_post.user = request.user
 			new_post.save()
-			# redirect user to posts page.
-			return redirect('posts:index')
+			return redirect('posts:index', username=request.user)
 	else:
 		form = PostForm
 	return render(request, 'dashboard/index.html', {'form':form})
