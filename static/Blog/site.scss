@@ -1,17 +1,44 @@
-$body-background: #281742;
 $body-font-color: #E3DAF7;
-$nav-background: #281742;
-$nav-font-family: Arial, Georgia, serif;
-$body-font-family: Arial, Georgia, serif;
+$background-color: #281742;
+$font-family: Arial, Georgia, serif;
+$link-color: #547E99;
+$block-padding: 8px;
+$block-margins: 8px 5px;
+
+a:link {
+	text-decoration: none;
+	color: $link-color;
+}
+
+a:visited {
+	text-decoration: none;
+	color: $link-color;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: $body-font-color;
+}
 
 nav {
-	background-color: $nav-background;
-	font-family: $nav-font-family;
+	background-color: $background-color;
+	font-family: $font-family;
 }
 
 body {
 	color: $body-font-color;
-	background-color: $body-background;
-	font-family: $body-font-family;
+	background-color: $background-color;
+	font-family: $font-family;
 }
 
+#post {
+	background-color: #472A7D;
+	padding: $block-padding;
+	margin: $block-margins;
+}
+
+#comment {
+	background-color: #52535E;
+	padding: $block-padding;
+	margin: $block-margins;
+}

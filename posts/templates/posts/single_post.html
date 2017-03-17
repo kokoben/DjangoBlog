@@ -1,14 +1,18 @@
 {% extends 'Blog/base.html' %}
 {% block content %}
+<div id="post">
 {# display post #}
 {{ post.title|linebreaksbr }}<br>
 {{ post|linebreaksbr }}
+</div>
 
 {# display comments #}
 {{ num_comments }} Comments:<br>
 {% for comment in comments %}
+	<div id="comment">
 	Posted by {{ comment.user }} on 
 	{{ comment|linebreaksbr }}
+	</div>
 {% endfor %}
 {% if user.is_authenticated %}
 	<form action="" method="post">

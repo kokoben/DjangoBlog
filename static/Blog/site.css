@@ -1,3 +1,15 @@
+a:link {
+  text-decoration: none;
+  color: #547E99; }
+
+a:visited {
+  text-decoration: none;
+  color: #547E99; }
+
+a:hover {
+  text-decoration: underline;
+  color: #E3DAF7; }
+
 nav {
   background-color: #281742;
   font-family: Arial, Georgia, serif; }
@@ -6,5 +18,15 @@ body {
   color: #E3DAF7;
   background-color: #281742;
   font-family: Arial, Georgia, serif; }
+
+#post {
+  background-color: #472A7D;
+  padding: 8px;
+  margin: 8px 5px; }
+
+#comment {
+  background-color: #52535E;
+  padding: 8px;
+  margin: 8px 5px; }
 
 /*# sourceMappingURL=site.css.map */
