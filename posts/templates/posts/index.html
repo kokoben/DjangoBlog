@@ -1,10 +1,14 @@
 {% extends 'Blog/base.html' %}
 {% block content %}
-{% for post in username.post_set.all reversed %}
-	<div id="post">
-	<a href={% url 'posts:display-post' username=username post_number=post.id  %}>{{ post.title|linebreaksbr }}</a> <br>
-	{{ post|linebreaksbr }}	
-	{{ post.num_comments }} comments<br>
-	</div>
-{% endfor %}
+{% if username == None %}
+	<h1>"Whoa dude, this user doesn't exist!"</h1>
+{% else %}
+	{% for post in username.post_set.all reversed %}
+		<div id="post">
+		<a href={% url 'posts:display-post' username=username post_number=post.id  %}>{{ post.title|linebreaksbr }}</a> <br>
+		{{ post|linebreaksbr }}	
+		{{ post.num_comments }} comments<br>
+		</div>
+	{% endfor %}
+{% endif %}
 {% endblock content%}

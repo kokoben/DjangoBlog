@@ -14,4 +14,4 @@ class Comment(models.Model):
 	def __str__(self):
 		date = self.utc_to_local(self.pub_date).strftime('%m-%d-%y')
 		time = self.utc_to_local(self.pub_date).strftime('%I:%M %p')
-		return '%s at %s \n %s \n' % (date, time, self.body)
+		return '%s at %s \n\n %s \n' % (date, time, self.body)

@@ -6,6 +6,11 @@ from comments.models import Comment
 from comments.forms import CommentForm
 
 def index(request, username):
+	try:
+		user = User.objects.get(username=username)
+	except:
+		return render(request, 'posts/index.html', {'username': None})
+
 	return render(request, 'posts/index.html', {'username': User.objects.get(username=username)})
 
 def displayPost(request, username, post_number):
