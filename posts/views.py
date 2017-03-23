@@ -7,10 +7,12 @@ from comments.forms import CommentForm
 
 def index(request, username):
 	try:
-		user = User.objects.get(username=username)
+		User.objects.get(username=username)
 	except:
 		return render(request, 'posts/index.html', {'username': None})
 
+	u = User.objects.get(username=username)
+	print(u.signupinfo.birthdate)
 	return render(request, 'posts/index.html', {'username': User.objects.get(username=username)})
 
 def displayPost(request, username, post_number):

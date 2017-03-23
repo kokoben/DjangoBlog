@@ -1,13 +1,13 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
-
 from .models import SignupInfo
 
+# add SignupInfo fields to user page in admin.
 class SignupInfoInline(admin.StackedInline):
 	model = SignupInfo
 	can_delete = False
-	verbose_name_plural = 'Signup Info'
+	verbose_name_plural = 'Additional Signup Info'
 	
 class UserAdmin(BaseUserAdmin):
 	inlines = (SignupInfoInline, )

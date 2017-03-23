@@ -11,7 +11,9 @@ def index(request):
 			new_user = form.save(commit=False)	
 			new_user.set_password(form.cleaned_data['password1'])
 			new_user.save()
-			new_user_birth = form_birth.save()
+			new_user_birth = form_birth.save(commit=False)
+			new_user_birth.user = new_user
+			new_user_birth.save()
 			new_user.is_active = True
 			login(request, new_user)
 			return redirect('signup:success')
