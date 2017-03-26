@@ -7,6 +7,7 @@ class Post(models.Model):
 	body = models.TextField()
 	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	num_comments = models.IntegerField('# of comments', default=0)
+	num_likes = models.IntegerField('# of likes', default=0)
 
 	def utc_to_local(self, utc_datetime):
 		return utc_datetime.astimezone(tz=None)

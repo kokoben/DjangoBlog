@@ -1,17 +1,24 @@
 from django.test import TestCase
-from django.contrib.auth.models import User
-from .models import SignupInfo
+from .forms import SignupForm, SignupForm2
 import datetime
 
 class SignupTestCase(TestCase):
-	def test_one_to_one(self):
-		"""verify that SignupInfo is correctly related to a user object via a one-to-one relationship."""
-		user = User.objects.create(username="coolperson")
-		# chosen date is arbitrary.
-		additional_info = SignupInfo.objects.create(user=user, birthdate=datetime.date(month=9, day=25, year=1999))
-		user.signupinfo = additional_info
-		user.save()
-		self.assertEqual(user.signupinfo.user, user)
-		self.assertEqual(user.signupinfo.birthdate, datetime.date(month=9, day=25, year=1999))
+    ''' verify that newly registered receives additional attributes in SignupInfo.'''
+        
+    def testSignupBirthdate(self):
+        form = SignupForm(data={'username':'tester', 'password1': 'blahblah1', 'password2': 'blahblah1',  'email': 'tester@gmail.com', 'first_name': 'test', 'last_name': 'er'})
 
-	
+        birthdate = datetime.date(month=12, day=22, year=1999)
+        form_birth = SignupForm2(data={'birthdate': birthdate})
+        if form.is_valid() and form_birth.is_valid():
+            new_user = form.save(commit = False)
+            new_user.set_password(form.cleaned_data['password1'])
+            new_user.save()
+            new_user_birth = form_birth.save(commit=False)
+            new_user_birth.user = new_user
+            new_user_birth.save()
+
+            self.assertEqual(new_user.signupinfo.birthdate, datetime.date(month=12, day=22, year=1999))
+        else:
+            print('failed to validate.')
+        

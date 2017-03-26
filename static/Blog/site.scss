@@ -42,3 +42,12 @@ body {
 	padding: $block-padding;
 	margin: $block-margins;
 }
+
+#comments {
+	padding-right: 20px;
+	color: $body-font-color;
+}
+
+#likes {
+	padding-left: 20px;
+}

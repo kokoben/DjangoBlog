@@ -29,4 +29,11 @@ body {
   padding: 8px;
   margin: 8px 5px; }
 
+#comments {
+  padding-right: 20px;
+  color: #E3DAF7; }
+
+#likes {
+  padding-left: 20px; }
+
 /*# sourceMappingURL=site.css.map */

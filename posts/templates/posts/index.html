@@ -5,9 +5,14 @@
 {% else %}
 	{% for post in username.post_set.all reversed %}
 		<div id="post">
-		<a href={% url 'posts:display-post' username=username post_number=post.id  %}>{{ post.title|linebreaksbr }}</a> <br>
-		{{ post|linebreaksbr }}	
-		{{ post.num_comments }} comments<br>
+			<a href={% url 'posts:display-post' username=username post_number=post.id  %}>{{ post.title|linebreaksbr }}</a> <br>
+			{{ post|linebreaksbr }}	
+			<span id="comments">
+				{{ post.num_comments }} comments 
+			</span>
+			<span id="likes">
+				{{ post.num_likes}} likes<br>
+			</span>
 		</div>
 	{% endfor %}
 {% endif %}
