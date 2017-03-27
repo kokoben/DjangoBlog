@@ -15,3 +15,7 @@ class Comment(models.Model):
 		date = self.utc_to_local(self.pub_date).strftime('%m-%d-%y')
 		time = self.utc_to_local(self.pub_date).strftime('%I:%M %p')
 		return '%s at %s \n\n %s \n' % (date, time, self.body)
+
+class Like(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    liker = models.ForeignKey(User, on_delete=models.CASCADE)
