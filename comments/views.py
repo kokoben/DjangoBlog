@@ -8,15 +8,12 @@ def like(request, username, post):
 
 	if post.like_set.filter(liker=request.user).exists():
 		# user has already liked this post, so unlike it.
-		print(post.like_set.all())
 		post.like_set.get(post=post, liker=request.user).delete()
-		print(post.like_set.all())
 		# decrease number of total likes for the post.
 		liked = True
 	else:
 		# user has not yet liked the post, so like it.
 		post.like_set.create(post=post, liker=request.user)
-		print(post.like_set.all())
 		# increase number of total likes for the post.
 		liked = False
 

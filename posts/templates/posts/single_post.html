@@ -1,11 +1,21 @@
 {% extends 'Blog/base.html' %}
+{% load likes_features %}
 {% block content %}
-<div id="post">
+<div class="post">
 {# display post #}
 {{ post.title|linebreaksbr }}<br>
 {{ post|linebreaksbr }}
-</div>
 
+{# display likes #}
+<span class="likes" id="like_{{ post.id }}">
+{% like_text post.like_set.count %}
+{# give user the option to like a post if logged in #}
+</span>
+{% if user.is_authenticated %}
+<a href={% url 'comments:like' username=post.user.username post=post.id %} class='like-link' id="like_link_{{ post.id }}">
+{% like_button request.user post %}
+</a><br>
+{% endif %}
 {# display comments #}
 {{ post.comment_set.count }} Comments:<br>
 {% for comment in comments %}
@@ -14,6 +24,7 @@
 	{{ comment|linebreaksbr }}
 	</div>
 {% endfor %}
+</div>
 {% if user.is_authenticated %}
 	<form action="" method="post">
 	{% csrf_token %}

@@ -26,7 +26,6 @@ def displayPost(request, username, post_number):
 			comment = form.save(commit=False)
 			comment.user = request.user
 			comment.post = post
-			comment.post.num_comments += 1
 			comment.post.save()
 			comment.save()
 			return redirect('posts:display-post', username=username, post_number=post_number)

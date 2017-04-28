@@ -12,12 +12,23 @@ $('.like-link').click(function(e){
 			// if user has already liked the post.
 			if (json.liked === true){
 				document.getElementById(like_link).innerHTML = "Like";
-				document.getElementById('like_'+json.post_id).innerHTML = (json.likes_count) + ' likes';
+				if (json.likes_count == 1){
+					document.getElementById('like_'+json.post_id).innerHTML = (json.likes_count) + " like";
+				}
+				else{
+					document.getElementById('like_'+json.post_id).innerHTML = (json.likes_count) + ' likes';
+				}
 			}
 			// if user hasn't liked the post.
 			else{
 				document.getElementById(like_link).innerHTML = "Unlike";
-				document.getElementById('like_'+json.post_id).innerHTML = (json.likes_count + ' likes');
+				console.log('poop on me now');
+				if (json.likes_count == 1){
+					document.getElementById('like_'+json.post_id).innerHTML = (json.likes_count) + " like";
+				}
+				else{
+					document.getElementById('like_'+json.post_id).innerHTML = (json.likes_count) + ' likes';
+				}
 			}
 		}
 	});
