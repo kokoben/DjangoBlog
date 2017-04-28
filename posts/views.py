@@ -9,15 +9,14 @@ def index(request, username):
 	try:
 		User.objects.get(username=username)
 	except:
+        # user doesn't exist.
 		return render(request, 'posts/index.html', {'username': None})
 
-	u = User.objects.get(username=username)
-	print(u.signupinfo.birthdate)
 	return render(request, 'posts/index.html', {'username': User.objects.get(username=username)})
 
 def displayPost(request, username, post_number):
 	post = Post.objects.get(user=User.objects.get(username=username), id=post_number)
-	num_comments = post.num_comments
+	num_comments = post.comment_set.count()
 	comments = Comment.objects.filter(post=post)
 
 	# generate and handle comment form.
@@ -39,7 +38,7 @@ def displayPost(request, username, post_number):
 
 def archive(request, username=None):
     return render(request, 'posts/archive.html')
-	
+
 class UserRedirectView(RedirectView):
 	def get_redirect_url(self, username):
 		return '/%s/posts' % username

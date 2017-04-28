@@ -1,18 +1,31 @@
 {% extends 'Blog/base.html' %}
+{% load likes_features %}
+{% block title %}
+<title>posts</title>
+{% endblock title %}
 {% block content %}
 {% if username == None %}
 	<h1>"Whoa dude, this user doesn't exist!"</h1>
 {% else %}
 	{% for post in username.post_set.all reversed %}
-		<div id="post">
-			<a href={% url 'posts:display-post' username=username post_number=post.id  %}>{{ post.title|linebreaksbr }}</a> <br>
+		<div class="post">
+			<a href={% url 'posts:display-post' username=username post_number=post.id %}>{{ post.title|linebreaksbr }}</a> <br>
 			{{ post|linebreaksbr }}	
-			<span id="comments">
-				{{ post.num_comments }} comments 
+			<span class="comments">
+				{{ post.comment_set.count }} comments
 			</span>
-			<span id="likes">
-				{{ post.num_likes}} likes<br>
+			<span class="likes" id="like_{{ post.id }}">
+				{{ post.like_set.count }} likes
 			</span>
+			{% if user.is_authenticated %}
+			<span>
+				<a href={% url 'comments:like' username=post.user.username post=post.id %} class="like-link" id="like_link_{{ post.id }}">
+				{% if user.is_authenticated %}
+				{% toggle_like request.user post %}
+				{% endif %}
+				</a>
+			</span>
+			{% endif %}
 		</div>
 	{% endfor %}
 {% endif %}

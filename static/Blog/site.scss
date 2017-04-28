@@ -31,19 +31,19 @@ body {
 	font-family: $font-family;
 }
 
-#post {
+.post {
 	background-color: #472A7D;
 	padding: $block-padding;
 	margin: $block-margins;
 }
 
-#comment {
+.comment {
 	background-color: #52535E;
 	padding: $block-padding;
 	margin: $block-margins;
 }
 
-#comments {
+.comments {
 	padding-right: 20px;
 	color: $body-font-color;
 }

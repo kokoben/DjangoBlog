@@ -7,9 +7,9 @@
 </div>
 
 {# display comments #}
-{{ num_comments }} Comments:<br>
+{{ post.comment_set.count }} Comments:<br>
 {% for comment in comments %}
-	<div id="comment">
+	<div class="comment">
 	Posted by {{ comment.user }} on 
 	{{ comment|linebreaksbr }}
 	</div>
