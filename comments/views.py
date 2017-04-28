@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 import json
 
 def like(request, username, post):
+	"handles ajax response for when user clicks a post's like button."
 	post = Post.objects.get(user=User.objects.get(username=username), id=post)
 
 	if post.like_set.filter(liker=request.user).exists():
@@ -21,4 +22,3 @@ def like(request, username, post):
 	response_data = {'liked': liked, 'likes_count': post.like_set.count(), 'post_id': post.id}
 
 	return HttpResponse(json.dumps(response_data), content_type='application/json')
-

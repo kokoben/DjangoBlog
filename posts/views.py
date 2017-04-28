@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.views.generic.base import RedirectView
 from .models import Post
 from comments.models import Comment
 from comments.forms import CommentForm
+import json
 
 def index(request, username):
 	try:
@@ -21,14 +23,15 @@ def displayPost(request, username, post_number):
 
 	# generate and handle comment form.
 	if request.method == "POST":
-		form = CommentForm(request.POST)
-		if form.is_valid():
-			comment = form.save(commit=False)
-			comment.user = request.user
-			comment.post = post
-			comment.post.save()
-			comment.save()
-			return redirect('posts:display-post', username=username, post_number=post_number)
+		comment_text = request.POST.get('the_comment')
+
+		comment = Comment(body=comment_text, post=post, user=request.user)
+		comment.save()
+
+		response_data={'comment': str(comment), 'user':request.user.username}
+		
+		
+		return HttpResponse(json.dumps(response_data), content_type='application/json')
 		
 	else:
 		form = CommentForm()
@@ -41,4 +44,3 @@ def archive(request, username=None):
 class UserRedirectView(RedirectView):
 	def get_redirect_url(self, username):
 		return '/%s/posts' % username
-

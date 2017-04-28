@@ -17,13 +17,13 @@
 				{{ post.comment_set.count }} comments
 			</span>
 			{# display likes #}
-			<span class="likes" id="like_{{ post.id }}">
+			<span class="likes" id="like-{{ post.id }}">
 			{% like_text post.like_set.count %}
 			</span>
 			{# give user the option of liking the post if logged in #}
 			{% if user.is_authenticated %}
 			<span>
-				<a href={% url 'comments:like' username=post.user.username post=post.id %} class="like-link" id="like_link_{{ post.id }}">
+				<a href={% url 'comments:like' username=post.user.username post=post.id %} class="like-link" id="like-link-{{ post.id }}">
 				{% like_button request.user post %}
 				</a>
 			</span>
