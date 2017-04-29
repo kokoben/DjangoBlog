@@ -18,7 +18,7 @@
 {% endif %}
 {# display comments #}
 <div id="comment-section">
-{{ post.comment_set.count }} Comments:<br>
+<span id="comment-count">{% comment_text post.comment_set.count %}:</span><br>
 {% for comment in comments %}
 	<div class="comment">
 	Posted by {{ comment.user }} on 

@@ -18,7 +18,6 @@ def index(request, username):
 
 def displayPost(request, username, post_number):
 	post = Post.objects.get(user=User.objects.get(username=username), id=post_number)
-	num_comments = post.comment_set.count()
 	comments = Comment.objects.filter(post=post)
 
 	# generate and handle comment form.
@@ -28,15 +27,14 @@ def displayPost(request, username, post_number):
 		comment = Comment(body=comment_text, post=post, user=request.user)
 		comment.save()
 
-		response_data={'comment': str(comment), 'user':request.user.username}
-		
+		response_data={'comment': str(comment), 'user':request.user.username, 'comment_count': post.comment_set.count()}
 		
 		return HttpResponse(json.dumps(response_data), content_type='application/json')
 		
 	else:
 		form = CommentForm()
 
-	return render(request, 'posts/single_post.html', {'post': post, 'comments':comments, 'num_comments':num_comments, 'form': form})
+	return render(request, 'posts/single_post.html', {'post': post, 'comments':comments, 'num_comments':post.comment_set.count(), 'form': form})
 
 def archive(request, username=None):
     return render(request, 'posts/archive.html')

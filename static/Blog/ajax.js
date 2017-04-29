@@ -77,16 +77,22 @@ $('#comment-form').submit(function(e){
 		url:  "/" + user + "/posts/" + post_number + "/",
 		data: {the_comment: $('#comment-text').val() } ,
 		success: function(json){
+			// append the comment.
 			var comment = JSON.stringify(json);
-			comment2 = jsonEscape(comment);
-			comment3 = JSON.parse(comment2);
-			console.log(comment);
-			console.log(comment2);
-			console.log(comment3);
+			comment = jsonEscape(comment);
+			comment = JSON.parse(comment);
 			console.log("Successful ajax");
 			$('#comment-text').val('');
-			var str = '<div class="comment">Posted by ' + json.user + " on " + comment3.comment + '</div>';
+			var str = '<div class="comment">Posted by ' + json.user + " on " + comment.comment + '</div>';
 			document.getElementById("comment-section").innerHTML += str;
+
+			// increase the comment text count.
+			if (json.comment_count == 1){
+				$('#comment-count').html(json.comment_count + ' Comment:');
+				}
+			else{
+				$('#comment-count').html(json.comment_count + ' Comments:');
+			}
 		}
 	});
 });

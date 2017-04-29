@@ -14,7 +14,7 @@
 			{{ post|linebreaksbr }}	
 			{# display comments #}
 			<span class="comments">
-				{{ post.comment_set.count }} comments
+				{% comment_text_index post.comment_set.count %}
 			</span>
 			{# display likes #}
 			<span class="likes" id="like-{{ post.id }}">
