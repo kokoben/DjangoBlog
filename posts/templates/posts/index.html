@@ -20,14 +20,20 @@
 			<span class="likes" id="like-{{ post.id }}">
 			{% like_text post.like_set.count %}
 			</span>
-			{# give user the option of liking the post if logged in #}
+			{# let logged in user like post.  #}
 			{% if user.is_authenticated %}
 			<span>
 				<a href={% url 'comments:like' username=post.user.username post=post.id %} class="like-link" id="like-link-{{ post.id }}">
 				{% like_button request.user post %}
 				</a>
-			</span>
 			{% endif %}
+			</span>
+			{# let logged in user delete post. #}
+			<span class="delete">
+				{% if user.is_authenticated %}
+				<a href={% url 'posts:delete-post' username=user.username post_number=post.id %} class="delete-link">Delete</a>
+			</span>
+				{% endif %}
 		</div>
 	{% endfor %}
 {% endif %}

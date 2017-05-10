@@ -19,17 +19,17 @@ body {
   background-color: #281742;
   font-family: Arial, Georgia, serif; }
 
-#post {
+.post {
   background-color: #472A7D;
   padding: 8px;
   margin: 8px 5px; }
 
-#comment {
+.comment {
   background-color: #52535E;
   padding: 8px;
   margin: 8px 5px; }
 
-#comments {
+.comments {
   padding-right: 20px;
   color: #E3DAF7; }
 

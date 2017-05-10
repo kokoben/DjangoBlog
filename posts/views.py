@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.views.generic.base import RedirectView
 from .models import Post
@@ -42,3 +42,8 @@ def archive(request, username=None):
 class UserRedirectView(RedirectView):
 	def get_redirect_url(self, username):
 		return '/%s/posts' % username
+
+def deletePost(request, username, post_number):
+    Post.objects.get(user=User.objects.get(username=username), id=post_number).delete()
+    return redirect('posts:index', username=username)
+

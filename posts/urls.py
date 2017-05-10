@@ -7,7 +7,8 @@ app_name= 'posts'
 extra_patterns = [
 	url(r'^$', views.index, name='index'),
 	# /posts/2 <-- post #2 for a given user
-	url(r'^(?P<post_number>\d+)/$', views.displayPost, name='display-post')
+	url(r'^(?P<post_number>\d+)/$', views.displayPost, name='display-post'),
+        url(r'^delete/(?P<post_number>\d+)/$', views.deletePost, name='delete-post')
 ]
 
 urlpatterns = [
