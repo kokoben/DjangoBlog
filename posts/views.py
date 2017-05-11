@@ -47,5 +47,3 @@ def deletePost(request, username, post_number):
     Post.objects.get(user=User.objects.get(username=username), id=post_number).delete()
     return redirect('posts:index', username=username)
 
-def test(request):
-    return HttpResponse("hello")
