@@ -28,10 +28,10 @@
 				</a>
 			{% endif %}
 			</span>
-			{# let logged in user delete post. #}
-			{% if user.is_authenticated %}
+			{# let logged in user delete own posts. #}
+			{% if post.user.is_authenticated %}
 			<span class="delete"> | 
-				<a href={% url 'posts:delete-post' username=user.username post_number=post.id %} class="delete-link">Delete</a>
+				<a href={% url 'posts:delete-post' username=post.user.username post_number=post.id %} class="delete-link">Delete</a>
 			</span>
 			{% endif %}
 		</div>
