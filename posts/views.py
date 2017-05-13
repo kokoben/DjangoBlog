@@ -11,8 +11,9 @@ def index(request, username):
     try:
     	User.objects.get(username=username)
     except:
-    # user doesn't exist.
-    	return render(request, 'posts/index.html', {'username': None})
+        # user doesn't exist.
+        context = {'username': None}
+        return render(request, 'posts/index.html', context)
 
     return render(request, 'posts/index.html', {'username': User.objects.get(username=username)})
 
@@ -22,19 +23,28 @@ def displayPost(request, username, post_number):
 
     # generate and handle comment form.
     if request.method == "POST":
-    	comment_text = request.POST.get('the_comment')
+        comment_text = request.POST.get('the_comment')
+        comment = Comment(body=comment_text, post=post, user=request.user)
+        comment.save()
+        user = request.user.username
+        num_comments = post.comment_set.count()
 
-    	comment = Comment(body=comment_text, post=post, user=request.user)
-    	comment.save()
-
-    	response_data={'comment': str(comment), 'user':request.user.username, 'comment_count': post.comment_set.count()}
+        response_data={'comment': str(comment), 'user':user, 'comment_count': num_comments}
     	
-    	return HttpResponse(json.dumps(response_data), content_type='application/json')
+        return HttpResponse(json.dumps(response_data), content_type='application/json')
 		
     else:
     	form = CommentForm()
 
-    return render(request, 'posts/single_post.html', {'post': post, 'comments':comments, 'num_comments':post.comment_set.count(), 'form': form})
+    num_comments = post.comment_set.count()
+    context = {
+        'post': post,
+        'comments':comments,
+        'num_comments':num_comments,
+        'form': form
+    }
+
+    return render(request, 'posts/single_post.html', context)
 
 def archive(request, username=None):
     return render(request, 'posts/archive.html')

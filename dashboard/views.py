@@ -12,5 +12,6 @@ def index(request):
             return redirect('posts:index', username=request.user)
     else:
         form = PostForm
-    return render(request, 'dashboard/index.html', {'form':form})
+        context = {'form': form}
+    return render(request, 'dashboard/index.html', context)
 	

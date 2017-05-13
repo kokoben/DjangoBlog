@@ -67,23 +67,21 @@ function jsonEscape(str){
 	return str.replace(/\\n/g, "<br>");	
 }
 
-
 $(document).ready(function(){
 $('#comment-form').submit(function(e){
 	e.preventDefault();
-	console.log("form submitted");
 	$.ajax({
 		type: "POST",
 		url:  "/" + user + "/posts/" + post_number + "/",
 		data: {the_comment: $('#comment-text').val() } ,
 		success: function(json){
 			// append the comment.
-			var comment = JSON.stringify(json);
-			comment = jsonEscape(comment);
-			comment = JSON.parse(comment);
-			console.log("Successful ajax");
+			var parsed_json = JSON.stringify(json);
+			parsed_json = jsonEscape(parsed_json);
+			parsed_json = JSON.parse(parsed_json);
+			// make comment textarea blank after submitting.
 			$('#comment-text').val('');
-			var str = '<div class="comment">Posted by ' + json.user + " on " + comment.comment + '</div>';
+			var str = '<div class="comment">Posted by ' + json.user + " on " + parsed_json.comment + "<a href={% url 'comments:reply' username=user.username comment_id=comment.id %}>Reply</a></div>";
 			document.getElementById("comment-section").innerHTML += str;
 
 			// increase the comment text count.
@@ -98,3 +96,8 @@ $('#comment-form').submit(function(e){
 });
 });
 
+$(document).ready(function(){
+	$('.reply-link').on('click', function(){
+					
+	});
+)};

@@ -12,18 +12,18 @@
 		<div class="post">
 			<a href={% url 'posts:display-post' username=username post_number=post.id %}>{{ post.title|linebreaksbr }}</a> <br>
 			{{ post|linebreaksbr }}	
-			{# display comments #}
+			{# display num comments #}
 			<span class="comments">
 				{% comment_text_index post.comment_set.count %}
 			</span>
-			{# display likes #}
+			{# display num likes #}
 			<span class="likes" id="like-{{ post.id }}">
 			{% like_text post.like_set.count %}
 			</span>
 			{# let logged in user like post.  #}
 			{% if user.is_authenticated %}
 			<span>
-				<a href={% url 'comments:like' username=post.user.username post=post.id %} class="like-link" id="like-link-{{ post.id }}">
+				<a href={% url 'comments:like' username=post.user.username post_id=post.id %} class="like-link" id="like-link-{{ post.id }}">
 				{% like_button request.user post %}
 				</a>
 			{% endif %}

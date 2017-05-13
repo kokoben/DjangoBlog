@@ -3,9 +3,9 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 import json
 
-def like(request, username, post):
+def like(request, username, post_id):
     '''handles ajax response for when user clicks a post's like button.'''
-    post = Post.objects.get(user=User.objects.get(username=username), id=post)
+    post = Post.objects.get(user=User.objects.get(username=username), id=post_id)
 
     if post.like_set.filter(liker=request.user).exists():
     	# user has already liked this post, so unlike it.
@@ -19,6 +19,13 @@ def like(request, username, post):
     	liked = False
 
     # need post id to target the correct post's likes count in the ajax response using the html id attribute.
-    response_data = {'liked': liked, 'likes_count': post.like_set.count(), 'post_id': post.id}
+    response_data = {
+        'liked': liked,
+        'likes_count': post.like_set.count(),
+        'post_id': post.id
+    }
 
     return HttpResponse(json.dumps(response_data), content_type='application/json')
+
+def reply(request, username, comment_id):
+    pass
