@@ -24,7 +24,6 @@ def like(request, username, post_id):
         'likes_count': post.like_set.count(),
         'post_id': post.id
     }
-
     return HttpResponse(json.dumps(response_data), content_type='application/json')
 
 def reply(request, username, comment_id):

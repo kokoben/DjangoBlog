@@ -15,24 +15,23 @@ def index(request, username):
         context = {'username': None}
         return render(request, 'posts/index.html', context)
 
-    return render(request, 'posts/index.html', {'username': User.objects.get(username=username)})
+    user = User.objects.get(username=username)
+    context = {'username': user}
+    return render(request, 'posts/index.html', context)
 
 def displayPost(request, username, post_number):
     post = Post.objects.get(user=User.objects.get(username=username), id=post_number)
     comments = Comment.objects.filter(post=post)
 
-    # generate and handle comment form.
+    # generate or handle comment form.
     if request.method == "POST":
         comment_text = request.POST.get('the_comment')
         comment = Comment(body=comment_text, post=post, user=request.user)
         comment.save()
         user = request.user.username
         num_comments = post.comment_set.count()
-
         response_data={'comment': str(comment), 'user':user, 'comment_count': num_comments}
-    	
         return HttpResponse(json.dumps(response_data), content_type='application/json')
-		
     else:
     	form = CommentForm()
 
@@ -43,7 +42,6 @@ def displayPost(request, username, post_number):
         'num_comments':num_comments,
         'form': form
     }
-
     return render(request, 'posts/single_post.html', context)
 
 def archive(request, username=None):

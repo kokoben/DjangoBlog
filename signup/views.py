@@ -25,7 +25,6 @@ def index(request):
             'form': form,
             'form_birth': form_birth
         }
-
         return render(request, 'signup/index.html', context)
 
 def success(request):

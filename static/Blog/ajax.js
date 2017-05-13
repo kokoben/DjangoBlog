@@ -1,6 +1,7 @@
 $(document).ready(function(){
 $('.like-link').click(function(e){
 	e.preventDefault();
+	console.log("poop");
 	// the url with specific user and post in regex.
 	var href = $(this).attr('href');
 	// the like button.
@@ -96,8 +97,11 @@ $('#comment-form').submit(function(e){
 });
 });
 
+/*
 $(document).ready(function(){
 	$('.reply-link').on('click', function(){
 					
 	});
 )};
+
+*/
