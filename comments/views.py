@@ -27,4 +27,9 @@ def like(request, username, post_id):
     return HttpResponse(json.dumps(response_data), content_type='application/json')
 
 def reply(request, username, comment_id):
-    pass
+    '''handles ajax response for when user replies to a comment.'''
+
+    response_data = {
+        'comment_id': comment_id
+    }
+    return HttpResponse(json.dumps(response_data), content_type='application/json')

@@ -1,7 +1,6 @@
 $(document).ready(function(){
 $('.like-link').click(function(e){
 	e.preventDefault();
-	console.log("poop");
 	// the url with specific user and post in regex.
 	var href = $(this).attr('href');
 	// the like button.
@@ -89,19 +88,36 @@ $('#comment-form').submit(function(e){
 			if (json.comment_count == 1){
 				$('#comment-count').html(json.comment_count + ' Comment:');
 				}
-			else{
+			else
 				$('#comment-count').html(json.comment_count + ' Comments:');
 			}
-		}
+		});
 	});
 });
-});
 
-/*
+// handle replies to comments.
 $(document).ready(function(){
-	$('.reply-link').on('click', function(){
-					
-	});
-)};
+	$('.reply-link').on('click', function(e){
+		e.preventDefault();
+		var href = $(this).attr('href');
+		var default_link_color  = $('a').css('color');
 
-*/
+		$.ajax({
+			url: href,
+			success: function(json){
+				var reply_link = $('#reply-link-'+json.comment_id);
+				// if reply link is same color as default link color, change to "selected" color.
+				if (reply_link.css('color') == default_link_color)
+				{
+					reply_link.css('color', 'yellow');
+				}
+				// else, change it back to default color.
+				else
+				{
+					reply_link.css('color', default_link_color);
+				}
+			}
+		});
+	});
+});
+

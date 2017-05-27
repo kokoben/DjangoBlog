@@ -23,8 +23,10 @@
 	<div class="comment">
 	Posted by {{ comment.user }} on 
 	{{ comment|linebreaksbr }}
-	{# display option to reply to comment #}
-	<a href={% url 'comments:reply' username=user.username comment_id=comment.id class="reply-link" id="like-link-{{ comment.id }}" %}>Reply</a>
+	{# display option for logged in user to reply to comment #}
+	{% if user.is_authenticated %}
+	<a href={% url 'comments:reply' username=user.username comment_id=comment.id %} class="reply-link" id="reply-link-{{ comment.id }}">Reply</a>
+	{% endif %}
 	</div>
 {% endfor %}
 </div>
