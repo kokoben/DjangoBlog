@@ -1,11 +1,10 @@
-from django.http import HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.views.generic.base import RedirectView
 from .models import Post
 from comments.models import Comment
 from comments.forms import CommentForm
-import json
 
 def index(request, username):
     try:
@@ -30,8 +29,11 @@ def displayPost(request, username, post_number):
         comment.save()
         user = request.user.username
         num_comments = post.comment_set.count()
-        response_data={'comment': str(comment), 'user':user, 'comment_count': num_comments}
-        return HttpResponse(json.dumps(response_data), content_type='application/json')
+        response_data = {
+        'comment': str(comment), 
+        'user':user, 'comment_count': num_comments
+        }
+        return JsonResponse(response_data)
     else:
     	form = CommentForm()
 

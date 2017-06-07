@@ -1,7 +1,6 @@
 from posts.models import Post
-from django.http import HttpResponse
+from django.http import JsonResponse
 from django.contrib.auth.models import User
-import json
 
 def like(request, username, post_id):
     '''handles ajax response for when user clicks a post's like button.'''
@@ -24,7 +23,7 @@ def like(request, username, post_id):
         'likes_count': post.like_set.count(),
         'post_id': post.id
     }
-    return HttpResponse(json.dumps(response_data), content_type='application/json')
+    return JsonResponse(response_data)
 
 def reply(request, username, post_id, comment_id):
     '''handles ajax response for when user replies to a comment.'''
@@ -37,4 +36,4 @@ def reply(request, username, post_id, comment_id):
         'comments_list': comments_list,
         'num_comments': post.comment_set.count() 
     }
-    return HttpResponse(json.dumps(response_data), content_type='application/json')
+    return JsonResponse(response_data)
