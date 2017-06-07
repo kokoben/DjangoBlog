@@ -26,10 +26,15 @@ def like(request, username, post_id):
     }
     return HttpResponse(json.dumps(response_data), content_type='application/json')
 
-def reply(request, username, comment_id):
+def reply(request, username, post_id, comment_id):
     '''handles ajax response for when user replies to a comment.'''
-
+    
+    post = Post.objects.get(id=post_id)
+    comments = post.comment_set.all().values('id')
+    comments_list = list(comments)
     response_data = {
-        'comment_id': comment_id
+        'comment_id': comment_id,
+        'comments_list': comments_list,
+        'num_comments': post.comment_set.count() 
     }
     return HttpResponse(json.dumps(response_data), content_type='application/json')

@@ -107,13 +107,23 @@ $(document).ready(function(){
 			success: function(json){
 				var reply_link = $('#reply-link-'+json.comment_id);
 				// if reply link is same color as default link color, change to "selected" color.
-				if (reply_link.css('color') == default_link_color)
-				{
+				if (reply_link.css('color') == default_link_color){
 					reply_link.css('color', 'yellow');
+					color = reply_link.css('color');
+					// then change any other yellow reply link back to default color.
+					for (i = 0; i < json.num_comments; i++){
+						if (json.comments_list[i].id != json.comment_id){
+							var non_reply_link = $('#reply-link-'+json.comments_list[i].id);
+							if (non_reply_link.css('color') == color){
+								non_reply_link.css('color', default_link_color);
+							}
+							else{
+							}
+						}
+					}
 				}
 				// else, change it back to default color.
-				else
-				{
+				else{
 					reply_link.css('color', default_link_color);
 				}
 			}
