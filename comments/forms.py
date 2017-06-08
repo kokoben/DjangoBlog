@@ -12,4 +12,4 @@ class ReplyForm(ModelForm):
     class Meta:
         model = Reply
         fields = ('body',)
-        widgets = {'body': forms.Textarea(attrs={'id': 'reply-text'})}
+        widgets = {'body': forms.Textarea(attrs={'id': 'reply-text', 'rows': 2, 'cols': 50})}

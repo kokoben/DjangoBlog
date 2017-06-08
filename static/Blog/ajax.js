@@ -117,10 +117,24 @@ $(document).ready(function(){
 							if (non_reply_link.css('color') == color){
 								non_reply_link.css('color', default_link_color);
 							}
-							else{
-							}
 						}
 					}
+					// bring out the reply form. TODO: replace hardcoding with better solution.
+					var reply_link_on_success
+					var str = "<form action="
+								+ "/" + json.username + "/posts/reply/" + json.comment_id
+								+ " method='post' id='reply-form'>"
+								+ csrf_token
+								+ '<table>'
+								+ reply_form
+								+ '</table>'
+								+ '<input type="submit", value="Reply!">'
+								+ '</form>';
+					console.log(str);
+					console.log('poop');
+					console.log('poop');
+					console.log(document.getElementById("reply-form-section-"+json.comment_id).innerHTML);
+					document.getElementById("reply-form-section-"+json.comment_id).innerHTML += str;
 				}
 				// else, change it back to default color.
 				else{

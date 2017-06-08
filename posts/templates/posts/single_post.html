@@ -26,6 +26,7 @@
 	{# display option for logged in user to reply to comment #}
 	{% if user.is_authenticated %}
 	<a href={% url 'comments:reply' username=user.username post_id=post.id comment_id=comment.id  %} class="reply-link" id="reply-link-{{ comment.id }}">Reply</a>
+	<div id="reply-form-section-{{ comment.id }}"></div>
 	{% endif %}
 	</div>
 {% endfor %}
@@ -36,7 +37,7 @@
 	{% csrf_token %}
 	<h2>Comment:</h2>
 		<table>
-		{{form.as_table}}
+		{{ comment_form.as_table }}
 		</table>
 		<input type="submit", value="Chime in!">
 	</form>
@@ -44,10 +45,12 @@
 Log in to comment!
 {% endif %}
 
-{# javascript variables for ajax response to comment submission. #}
+{# javascript variables for ajax response to comment and reply submission. #}
 <script type="text/javascript">
 var user = "{{ post.user }}"
 var post_number = "{{ post.id }}"
 var logged_in_user = "{{ user }}"
+var csrf_token = "{% csrf_token %}"
+var reply_form = '{% spaceless %}{{ reply_form.as_table }} {% endspaceless %}'
 </script>
 {% endblock content %}

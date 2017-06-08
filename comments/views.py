@@ -32,6 +32,7 @@ def reply(request, username, post_id, comment_id):
     comments = post.comment_set.all().values('id')
     comments_list = list(comments)
     response_data = {
+        'username': username,
         'comment_id': comment_id,
         'comments_list': comments_list,
         'num_comments': post.comment_set.count() 
