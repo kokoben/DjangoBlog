@@ -82,7 +82,7 @@ $('#comment-form').submit(function(e){
 			// make comment textarea blank after submitting.
 			$('#comment-text').val('');
 			var str = '<div class="comment">Posted by ' + json.user + " on " + parsed_json.comment + "<a href={% url 'comments:reply' username=user.username comment_id=comment.id %}>Reply</a></div>";
-			document.getElementById("comment-section").innerHTML += str;
+			$('#comment-section').append(str);
 
 			// increase the comment text count.
 			if (json.comment_count == 1){
@@ -110,12 +110,14 @@ $(document).ready(function(){
 				if (reply_link.css('color') == default_link_color){
 					reply_link.css('color', 'yellow');
 					color = reply_link.css('color');
-					// then change any other yellow reply link back to default color.
+					// then change any other selected, yellow reply link back to default color. (happens if another reply link was previously selected.
 					for (i = 0; i < json.num_comments; i++){
 						if (json.comments_list[i].id != json.comment_id){
 							var non_reply_link = $('#reply-link-'+json.comments_list[i].id);
 							if (non_reply_link.css('color') == color){
 								non_reply_link.css('color', default_link_color);
+								// also, hide its reply form.
+								$('#reply-form-section-'+json.comments_list[i].id).empty();
 							}
 						}
 					}
@@ -130,12 +132,13 @@ $(document).ready(function(){
 								+ '</table>'
 								+ '<input type="submit", value="Reply!">'
 								+ '</form>';
-					console.log(document.getElementById("reply-form-section-"+json.comment_id).innerHTML);
-					document.getElementById("reply-form-section-"+json.comment_id).innerHTML += str;
+					$('#reply-form-section-'+json.comment_id).html(str);
 				}
 				// else, change it back to default color.
 				else{
 					reply_link.css('color', default_link_color);
+					// also, hide the reply form again.
+					$('#reply-form-section-'+json.comment_id).empty();
 				}
 			}
 		});
