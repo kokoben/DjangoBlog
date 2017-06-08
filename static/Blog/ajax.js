@@ -130,9 +130,6 @@ $(document).ready(function(){
 								+ '</table>'
 								+ '<input type="submit", value="Reply!">'
 								+ '</form>';
-					console.log(str);
-					console.log('poop');
-					console.log('poop');
 					console.log(document.getElementById("reply-form-section-"+json.comment_id).innerHTML);
 					document.getElementById("reply-form-section-"+json.comment_id).innerHTML += str;
 				}
