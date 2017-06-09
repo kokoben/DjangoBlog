@@ -81,6 +81,7 @@ $('#comment-form').submit(function(e){
 			parsed_json = JSON.parse(parsed_json);
 			// make comment textarea blank after submitting.
 			$('#comment-text').val('');
+			// generate the reply link address.
 			var str = '<div class="comment">Posted by ' + json.user + " on " + parsed_json.comment + "<a href=/comments/reply/" + logged_in_user + "/" + post_number + "/" + json.comment_id + " class='reply-link' id='reply-link-" + json.comment_id + "'>Reply</a><div id='reply-form-section-" + json.comment_id + "'></div></div>";
 			$('#comment-section').append(str);
 
@@ -98,7 +99,6 @@ $('#comment-form').submit(function(e){
 // handle replies to comments.
 $(document).ready(function(){
 	$('#comment-section').on('click', '.reply-link', function(e){
-		console.log('poop');
 		e.preventDefault();
 		var href = $(this).attr('href');
 		var default_link_color  = $('a').css('color');
@@ -122,10 +122,9 @@ $(document).ready(function(){
 							}
 						}
 					}
-					// bring out the reply form. TODO: replace hardcoding with better solution.
 					var reply_link_on_success
 					var str = "<form action="
-								+ "/" + json.username + "/posts/reply/" + json.comment_id
+								+ href
 								+ " method='post' id='reply-form'>"
 								+ csrf_token
 								+ '<table>'

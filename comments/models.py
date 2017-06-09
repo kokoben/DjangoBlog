@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 class Comment(models.Model):
     body = models.TextField()
     pub_date = models.DateTimeField('date published', auto_now_add=True)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, unique=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
     
     def utc_to_local(self, utc_datetime):
         return utc_datetime.astimezone(tz=None)
@@ -20,8 +20,8 @@ class Comment(models.Model):
 class Reply(models.Model):
     body = models.TextField()
     pub_date = models.DateTimeField('date published', auto_now_add=True)
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, unique=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True)
 
     def utc_to_local(self, utc_datetime):
         return utc_datetime.astimezone(tz=None)
@@ -33,6 +33,6 @@ class Reply(models.Model):
         return '%s at %s \n\n %s \n' % (date, time, self.body)
 
 class Like(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
-    liker = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, unique=True)
+    liker = models.ForeignKey(User, on_delete=models.CASCADE, null=True, unique=True)
 
