@@ -81,7 +81,7 @@ $('#comment-form').submit(function(e){
 			parsed_json = JSON.parse(parsed_json);
 			// make comment textarea blank after submitting.
 			$('#comment-text').val('');
-			var str = '<div class="comment">Posted by ' + json.user + " on " + parsed_json.comment + "<a href={% url 'comments:reply' username=user.username comment_id=comment.id %}>Reply</a></div>";
+			var str = '<div class="comment">Posted by ' + json.user + " on " + parsed_json.comment + "<a href=/comments/reply/" + logged_in_user + "/" + post_number + "/" + json.comment_id + " class='reply-link' id='reply-link-" + json.comment_id + "'>Reply</a><div id='reply-form-section-" + json.comment_id + "'></div></div>";
 			$('#comment-section').append(str);
 
 			// increase the comment text count.
@@ -97,7 +97,8 @@ $('#comment-form').submit(function(e){
 
 // handle replies to comments.
 $(document).ready(function(){
-	$('.reply-link').on('click', function(e){
+	$('#comment-section').on('click', '.reply-link', function(e){
+		console.log('poop');
 		e.preventDefault();
 		var href = $(this).attr('href');
 		var default_link_color  = $('a').css('color');

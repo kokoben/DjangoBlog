@@ -31,6 +31,7 @@ def displayPost(request, username, post_number):
         num_comments = post.comment_set.count()
         response_data = {
         'comment': str(comment), 
+        'comment_id': comment.id,
         'user':user,
         'comment_count': num_comments
         }
