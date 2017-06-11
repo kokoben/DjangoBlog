@@ -33,6 +33,11 @@ body {
   padding-right: 20px;
   color: #E3DAF7; }
 
+.reply {
+  background-color: #C1CCDC;
+  padding: 8px;
+  margin: 8px 5px; }
+
 #likes {
   padding-left: 20px; }
 

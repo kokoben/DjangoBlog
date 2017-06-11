@@ -48,6 +48,12 @@ body {
 	color: $body-font-color;
 }
 
+.reply {
+	background-color: #C1CCDC;
+	padding: $block-padding;
+	margin: $block-margins;
+}
+
 #likes {
 	padding-left: 20px;
 }

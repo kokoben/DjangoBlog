@@ -67,6 +67,7 @@ function jsonEscape(str){
 	return str.replace(/\\n/g, "<br>");	
 }
 
+// when user submits comment form.
 $(document).ready(function(){
 $('#comment-form').submit(function(e){
 	e.preventDefault();
@@ -96,7 +97,7 @@ $('#comment-form').submit(function(e){
 	});
 });
 
-// handle replies to comments.
+// when user clicks on reply link.
 $(document).ready(function(){
 	$('#comment-section').on('click', '.reply-link', function(e){
 		e.preventDefault();
@@ -144,4 +145,13 @@ $(document).ready(function(){
 		});
 	});
 });
+
+// when user submits reply form.
+$(document).ready(function(){
+	$('#comment-form').submit(function(e){
+		e.preventDefault();
+		$.ajax({})
+	});
+});
+
 
