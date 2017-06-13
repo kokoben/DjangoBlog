@@ -69,7 +69,7 @@ function jsonEscape(str){
 
 // when user submits comment form.
 $(document).ready(function(){
-$('#comment-form').on('submit', function(e){
+$(document).on('submit', '#comment-form', function(e){
 	e.preventDefault();
 	$.ajax({
 		type: "POST",
@@ -124,7 +124,7 @@ $(document).ready(function(){
 						}
 					}
 					var reply_link_on_success
-					var str = "<form method='post'"
+					var str = "<form action='/" + user + "/posts/reply/" + json.comment_id + "/' method='post'"
 								+ " id='reply-form'>"
 								+ csrf_token
 								+ '<table>'
@@ -147,18 +147,21 @@ $(document).ready(function(){
 
 // when user submits reply form.
 $(document).ready(function(){
-	$('#reply-form').on('submit', (function(e){
+	$('#comment-section').on('submit', '#reply-form', function(e){
 		console.log("pupsdkl;fjkasl;fjaksl;fjkasl;fjk;aslfjAL:SKJDA:LDJEKL:SJDpies");
 		e.preventDefault();
-		console.log($('#reply-text').value());
+		var href = $(this).attr('action');
+		console.log(href);
+		console.log($('#reply-text').val());
 		$.ajax({
-			url: blah,
-			data: {the_reply: $('#reply-text').value()},
+			type: "POST",
+			url: href,
+			data: {the_reply: $('#reply-text').val()},
 			success: function(json){
 				console.log("poop");
 			}
 		});
-	}));
+	});
 });
 
 

@@ -51,10 +51,11 @@ def displayPost(request, username, post_number):
     return render(request, 'posts/single_post.html', context)
 
 def handleReply(request, username, comment_number):
+# username is of the posts's user.
     comment = Comment.objects.get(user=User.objects.get(username=username), id=comment_number)
     if request.method == "POST":
         reply_text = request.POST.get('the_reply')
-        reply = Reply(body=reply_text, comment=comment)
+        reply = Reply(body=reply_text, comment=comment, user=request.user)
         reply.save()
         user = request.user.username
         response_data = {

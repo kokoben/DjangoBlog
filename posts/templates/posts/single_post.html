@@ -24,15 +24,19 @@
 		Posted by {{ comment.user }} on 
 		{{ comment|linebreaksbr }}
 		{# display replies #}
-		{% for reply in comment.reply_set.all %}
-			Posted by {{ reply.user }} on
-			{{ reply|linebreaksbr }}
-		{% endfor %}
-		{# display option for logged in user to reply to comment #}
-		{% if user.is_authenticated %}
-		<a href={% url 'comments:reply' username=user.username post_id=post.id comment_id=comment.id  %} class="reply-link" id="reply-link-{{ comment.id }}">Reply</a>
-		<div id="reply-form-section-{{ comment.id }}">{# reply form appears when user clicks on reply link. #}</div>
-		{% endif %}
+			<div id="reply-section">
+				{% for reply in comment.reply_set.all %}
+				<div class='reply'>
+					{{ reply.user }} on
+					{{ reply|linebreaksbr }}
+				</div>
+				{% endfor %}
+			{# display option for logged in user to reply to comment #}
+			{% if user.is_authenticated %}
+			<a href={% url 'comments:reply' username=user.username post_id=post.id comment_id=comment.id  %} class="reply-link" id="reply-link-{{ comment.id }}">Reply</a>
+			<div id="reply-form-section-{{ comment.id }}">{# reply form appears when user clicks on reply link. #}</div>
+			{% endif %}
+			</div>
 		</div>
 	{% endfor %}
 	</div>
