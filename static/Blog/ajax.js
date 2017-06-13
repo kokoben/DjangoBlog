@@ -69,7 +69,7 @@ function jsonEscape(str){
 
 // when user submits comment form.
 $(document).ready(function(){
-$('#comment-form').submit(function(e){
+$('#comment-form').on('submit', function(e){
 	e.preventDefault();
 	$.ajax({
 		type: "POST",
@@ -124,9 +124,8 @@ $(document).ready(function(){
 						}
 					}
 					var reply_link_on_success
-					var str = "<form action="
-								+ href
-								+ " method='post' id='reply-form'>"
+					var str = "<form method='post'"
+								+ " id='reply-form'>"
 								+ csrf_token
 								+ '<table>'
 								+ reply_form
@@ -148,10 +147,18 @@ $(document).ready(function(){
 
 // when user submits reply form.
 $(document).ready(function(){
-	$('#comment-form').submit(function(e){
+	$('#reply-form').on('submit', (function(e){
+		console.log("pupsdkl;fjkasl;fjaksl;fjkasl;fjk;aslfjAL:SKJDA:LDJEKL:SJDpies");
 		e.preventDefault();
-		$.ajax({})
-	});
+		console.log($('#reply-text').value());
+		$.ajax({
+			url: blah,
+			data: {the_reply: $('#reply-text').value()},
+			success: function(json){
+				console.log("poop");
+			}
+		});
+	}));
 });
 
 

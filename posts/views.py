@@ -53,7 +53,7 @@ def displayPost(request, username, post_number):
 def handleReply(request, username, comment_number):
     comment = Comment.objects.get(user=User.objects.get(username=username), id=comment_number)
     if request.method == "POST":
-        reply_text = request.POST.get("the_reply")
+        reply_text = request.POST.get('the_reply')
         reply = Reply(body=reply_text, comment=comment)
         reply.save()
         user = request.user.username
