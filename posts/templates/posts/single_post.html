@@ -24,7 +24,7 @@
 	Posted by {{ comment.user }} on 
 	{{ comment|linebreaksbr }}
 	{# display replies #}
-	{% for reply in comment.reply_set.all() %}
+	{% for reply in comment.reply_set.all %}
 		Posted by {{ reply.user }} on
 		{{ reply|linebreaksbr }}
 	{% endfor %}
