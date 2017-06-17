@@ -22,7 +22,7 @@
 			{% if like.liker == user %}
 				You liked this<br>
 			{% else %}
-				{{ like.liker }} liked this<br>	
+				{{ like|linebreaksbr }}	
 			{% endif %}
 		{#{% like_list user post %}#}
 		{% endfor %}
