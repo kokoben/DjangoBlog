@@ -6,7 +6,7 @@
 {{ post.title|linebreaksbr }}<br>
 {{ post|linebreaksbr }}
 
-{# display likes #}
+{# display likes count #}
 <span class="likes" id="like-{{ post.id }}">
 {% like_text post.like_set.count %}
 {# give user the option to like a post if logged in #}
@@ -15,6 +15,19 @@
 <a href={% url 'comments:like' username=post.user.username post_id=post.id %} class='like-link' id="like-link-{{ post.id }}">
 {% like_button request.user post %}
 </a><br>
+{# display likes list if there's at least one like #}
+	{% if post.like_set.count > 0 %}
+	<br>
+		{% for like in post.like_set.all %}
+			{% if like.liker == user %}
+				You liked this<br>
+			{% else %}
+				{{ like.liker }} liked this<br>	
+			{% endif %}
+		{#{% like_list user post %}#}
+		{% endfor %}
+	<br>
+	{% endif %}
 {% endif %}
 {# display comments #}
 	<div id="comment-section">

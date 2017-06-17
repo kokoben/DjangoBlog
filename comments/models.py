@@ -36,3 +36,6 @@ class Like(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
     liker = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
+    def __str__(self):
+        return '%s liked this\n' % self.liker
+
