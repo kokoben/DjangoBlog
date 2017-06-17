@@ -61,6 +61,7 @@ def handleReply(request, username, comment_number):
         response_data = {
             'reply': str(reply),
             'user': user,
+            'comment_id': comment_number
         }
         return JsonResponse(response_data)
 

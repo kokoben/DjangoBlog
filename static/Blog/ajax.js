@@ -55,6 +55,7 @@ function csrfSafeMethod(method) {
     // these HTTP methods do not require CSRF protection
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
+
 $.ajaxSetup({
     beforeSend: function(xhr, settings) {
         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
@@ -148,17 +149,27 @@ $(document).ready(function(){
 // when user submits reply form.
 $(document).ready(function(){
 	$('#comment-section').on('submit', '#reply-form', function(e){
-		console.log("pupsdkl;fjkasl;fjaksl;fjkasl;fjk;aslfjAL:SKJDA:LDJEKL:SJDpies");
 		e.preventDefault();
 		var href = $(this).attr('action');
-		console.log(href);
-		console.log($('#reply-text').val());
 		$.ajax({
 			type: "POST",
 			url: href,
 			data: {the_reply: $('#reply-text').val()},
 			success: function(json){
-				console.log("poop");
+				var parsed_json = JSON.stringify(json);
+				parsed_json = jsonEscape(parsed_json);
+				parsed_json = JSON.parse(parsed_json);
+				str = "<div class='reply'>" 
+				+ json.user + " on " 
+				+ parsed_json.reply + "</div>";
+				console.log(str);
+				$('#reply-append-'+json.comment_id).append(str);
+				// empty and delete reply form upon successful submission.
+				// then make reply link cahnge back to default color.
+				$('#reply-text').val('');
+				$('#reply-form').remove();
+				var default_link_color = $('a').css('color');
+				$('#reply-link-'+json.comment_id).css('color', default_link_color);
 			}
 		});
 	});

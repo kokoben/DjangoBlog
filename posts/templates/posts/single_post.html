@@ -25,12 +25,14 @@
 		{{ comment|linebreaksbr }}
 		{# display replies #}
 			<div id="reply-section">
-				{% for reply in comment.reply_set.all %}
-				<div class='reply'>
-					{{ reply.user }} on
-					{{ reply|linebreaksbr }}
+				<div id="reply-append-{{ comment.id }}">
+					{% for reply in comment.reply_set.all %}
+					<div class='reply'>
+						{{ reply.user }} on
+						{{ reply|linebreaksbr }}
+					</div>
+					{% endfor %}
 				</div>
-				{% endfor %}
 				{# display option for logged in user to reply to comment #}
 				{% if user.is_authenticated %}
 				<a href={% url 'comments:reply' username=user.username post_id=post.id comment_id=comment.id  %} class="reply-link" id="reply-link-{{ comment.id }}">Reply</a>
