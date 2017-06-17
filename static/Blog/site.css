@@ -40,7 +40,7 @@ body {
   padding: 8px;
   margin: 10px; }
 
-#reply-section a {
+.reply-link {
   padding: 8px; }
 
 #likes {

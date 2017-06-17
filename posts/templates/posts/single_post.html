@@ -20,9 +20,9 @@
 	<br>
 		{% for like in post.like_set.all %}
 			{% if like.liker == user %}
-				You liked this<br>
+				<a href="{% url 'posts:index' user %}"> You </a>liked this<br>
 			{% else %}
-				{{ like|linebreaksbr }}	
+				<a href="{% url 'posts:index' like.liker %}">{{ like.liker }}</a> liked this<br>
 			{% endif %}
 		{#{% like_list user post %}#}
 		{% endfor %}
@@ -34,14 +34,14 @@
 	<span id="comment-count">{% comment_text post.comment_set.count %}:</span><br>
 	{% for comment in comments %}
 		<div class="comment">
-		Posted by {{ comment.user }} on 
+		Posted by <a href="{% url 'posts:index' comment.user %}">{{ comment.user }}</a> on 
 		{{ comment|linebreaksbr }}
 		{# display replies #}
 			<div id="reply-section">
 				<div id="reply-append-{{ comment.id }}">
 					{% for reply in comment.reply_set.all %}
 					<div class='reply'>
-						{{ reply.user }} on
+							<a href="{% url 'posts:index' reply.user %}">{{ reply.user }}</a> on
 						{{ reply|linebreaksbr }}
 					</div>
 					{% endfor %}
