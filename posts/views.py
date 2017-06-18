@@ -5,6 +5,7 @@ from django.views.generic.base import RedirectView
 from .models import Post
 from comments.models import Comment, Reply
 from comments.forms import CommentForm, ReplyForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request, username):
     try:
@@ -15,7 +16,21 @@ def index(request, username):
         return render(request, 'posts/index.html', context)
 
     user = User.objects.get(username=username)
-    context = {'username': user}
+    posts = Post.objects.filter(user=user)
+    paginator = Paginator(posts, 8)
+
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page);
+    except PageNotAnInteger:
+        posts = paginator.page(1);
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
+    context = {
+        'username': user,
+        'posts': posts
+    }
     return render(request, 'posts/index.html', context)
 
 def displayPost(request, username, post_number):

@@ -36,5 +36,19 @@
 			{% endif %}
 		</div>
 	{% endfor %}
+		<div class='pagination'>
+			<span class='page-nav'>
+				{% if posts.has_previous %}
+					<a href="?page={{ posts.previous_page_number }}">previous</a>
+			</span>
+				{% endif %}
+			<span class='current'>
+				page {{ posts.number }} of {{ posts.paginator.num_pages }}
+			</span>
+			{% if posts.has_next %}
+				<a href="?page={{ posts.next_page_number }}">next</a>
+			{% endif %}
+			</span>
+		</div>
 {% endif %}
 {% endblock content%}
