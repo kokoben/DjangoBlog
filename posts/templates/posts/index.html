@@ -8,7 +8,7 @@
 	<h1>"Whoa dude, this user doesn't exist!"</h1>
 {% else %}
 	{# display each of the user's posts #}
-	{% for post in username.post_set.all reversed %}
+	{% for post in posts %}
 		<div class="post">
 			<a href={% url 'posts:display-post' username=username post_number=post.id %}>{{ post.title|linebreaksbr }}</a> <br>
 			{{ post|linebreaksbr }}	
@@ -38,17 +38,48 @@
 	{% endfor %}
 		<div class='pagination'>
 			<span class='page-nav'>
+				<span> {# show the link to the first page #}
+					<a href="?page=1">&lt;&lt;</a>
+				</span>
 				{% if posts.has_previous %}
-					<a href="?page={{ posts.previous_page_number }}">previous</a>
-			</span>
+					<a href="?page={{ posts.previous_page_number }}">&lt;</a>
 				{% endif %}
-			<span class='current'>
-				page {{ posts.number }} of {{ posts.paginator.num_pages }}
-			</span>
+				{% if posts.number == 2 %} {# if on page 2, show previous page (page 1) #}
+					<span>
+						<a href="?page={{ posts.previous_page_number }}">{{ posts.previous_page_number }}</a>
+					</span>
+				{% endif %}
+				{% if posts.number >= 3 %} {# if on page 3 or greater, show previous two pages #}
+					<span> 
+						<a href="?page={{ posts.previous_page_number }}">{{ previous_previous_page.number }}</a>
+					</span>
+					<span>
+						<a href="?page={{ posts.previous_page_number }}">{{ posts.previous_page_number }}</a>
+					</span>
+				{% endif %}
+				<span class='current'> {# show the current page. #}
+					{{ posts.number }}
+				</span>
+				{% if last_minus_current >= 2  %}
+				{# if on third to last page or earlier, show next two pages. #}
+				<span>
+					<a href="?page={{ posts.next_page_number }}">{{ posts.next_page_number }}</a>
+				</span>
+				<span>
+					<a href="?page={{ next_next_page.number }}">{{ next_next_page.number }}</a>
+				</span>
+				{% elif last_minus_current == 1 %}
+				{# if on second to last page, show next (last) page only. #}
+				<span>
+					<a href="?page={{ posts.next_page_number }}">{{ posts.next_page_number }}</a>
+				</span>
+				{% endif %}
 			{% if posts.has_next %}
-				<a href="?page={{ posts.next_page_number }}">next</a>
+				<a href="?page={{ posts.next_page_number }}">&gt;</a>
 			{% endif %}
+			<span> {# show the link to last page #}
+				<a href="?page={{ posts.paginator.num_pages }}">&gt;&gt;</a>
 			</span>
 		</div>
 {% endif %}
-{% endblock content%}
+{% endblock content %}

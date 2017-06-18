@@ -16,7 +16,7 @@ def index(request, username):
         return render(request, 'posts/index.html', context)
 
     user = User.objects.get(username=username)
-    posts = Post.objects.filter(user=user)
+    posts = Post.objects.filter(user=user).order_by('-pub_date')
     paginator = Paginator(posts, 8)
 
     page = request.GET.get('page')
@@ -27,9 +27,29 @@ def index(request, username):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
 
+    try:
+        lastMinusCurrent = paginator.num_pages - posts.number
+    except EmptyPage:
+        lastMinusCurrent = 1
+    try:
+        previousPreviousPage = paginator.page(posts.number - 2)
+    except EmptyPage:
+        previousPreviousPage = 1
+    try:
+        nextNextPage = paginator.page(posts.number + 2)
+    except EmptyPage:
+        nextNextPage = 1
+
+        print(lastMinusCurrent)
+        print(previousPreviousPage)
+        print(nextNextPage)
+
     context = {
         'username': user,
-        'posts': posts
+        'posts': posts,
+        'last_minus_current': lastMinusCurrent,
+        'previous_previous_page': previousPreviousPage,
+        'next_next_page': nextNextPage
     }
     return render(request, 'posts/index.html', context)
 
