@@ -7,7 +7,6 @@ urlpatterns = [
     path('signup/', include('signup.urls')),
     path('^dash/', include('dashboard.urls')),
     path('', include('django.contrib.auth.urls')),
-    path('logout/', LogoutView.as_view(), {'next_page':'login'}, name='logout'),
     path('admin/', admin.site.urls),
     path('(?P<username>\w+)/', include('posts.urls')),
     path('comments/', include('comments.urls'))
