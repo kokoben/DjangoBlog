@@ -72,6 +72,7 @@ TEMPLATES = [
 ]
 
 LOGIN_REDIRECT_URL = 'dashboard:index'
+LOGOUT_REDIRECT_URL = 'home:index'
 
 WSGI_APPLICATION = 'Blog.wsgi.application'
 
