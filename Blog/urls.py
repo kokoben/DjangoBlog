@@ -10,6 +10,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('<username>/', include('posts.urls')),
     path('comments/', include('comments.urls'))
-
 ]
 
