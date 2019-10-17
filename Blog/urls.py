@@ -1,17 +1,16 @@
-from django.conf.urls import include, url
 from django.contrib import admin
-from . import views
-from django.contrib.auth import logout
+from django.contrib.auth.views import LogoutView
+from django.urls import path, include
 
 urlpatterns = [
-	url(r'^', include('home.urls')),
-	url(r'^signup/', include('signup.urls')),
-	url(r'^dash/', include('dashboard.urls')),
-	url(r'^login/$', views.custom_login, name='login'),
-	url(r'^logout/$', logout, {'next_page':'login'}, name='logout'),
-        url(r'^admin/', admin.site.urls),
-	url(r'^(?P<username>\w+)/', include('posts.urls')),
-        url(r'^comments/', include('comments.urls'))
+    path('', include('home.urls')),
+    path('signup/', include('signup.urls')),
+    path('^dash/', include('dashboard.urls')),
+    path('', include('django.contrib.auth.urls')),
+    path('logout/', LogoutView.as_view(), {'next_page':'login'}, name='logout'),
+    path('admin/', admin.site.urls),
+    path('(?P<username>\w+)/', include('posts.urls')),
+    path('comments/', include('comments.urls'))
 
 ]
 
