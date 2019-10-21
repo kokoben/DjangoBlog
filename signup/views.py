@@ -20,14 +20,12 @@ def index(request):
             login(request, new_user)
             return redirect('signup:success')
         else:
-            try:
-                validate_password(form.cleaned_data['password1'])
-            except ValidationError as e:
-                context = {
-                    'form': form,
-                    'form_birth': form_birth
-                }
-                return render(request, 'signup/index.html', context)
+            # handle invalid password
+            context = {
+                'form': form,
+                'form_birth': form_birth
+            }
+            return render(request, 'signup/index.html', context)
     else:
         form = SignupForm()
         form_birth = SignupForm2()
