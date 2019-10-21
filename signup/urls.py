@@ -1,10 +1,10 @@
-from django.conf.urls import url
+from django.urls import path, include
 from . import views
 
 app_name='signup'
 
 urlpatterns = [
-	url(r'^$', views.index, name="index"),
-	url(r'^success/', views.success, name="success")
+	path('', views.index, name="index"),
+	path('success/', views.success, name="success")
 ]
 
