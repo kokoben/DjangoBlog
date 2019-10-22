@@ -9,32 +9,36 @@
 {% else %}
 	{# display each of the user's posts #}
 	{% for post in posts %}
-		<div class="post">
-			<a href={% url 'posts:display-post' username=username post_number=post.id %}>{{ post.title|linebreaksbr }}</a> <br>
-			{{ post|linebreaksbr }}	
-			{# display num comments #}
+	<div class="post card purple darken-4">
+		<div class="card-content white-text">
+			<div class="card-title">
+				<a href={% url 'posts:display-post' username=username post_number=post.id %}>{{ post.title|linebreaksbr }}</a> <br>
+			</div>
+			{{ post|linebreaksbr }}
+		</div>
+		{# display num comments #}
+		{# let logged in user like post.  #}
+		{% if user.is_authenticated %}
+		<div class="card-action">
 			<span class="comments">
 				{% comment_text_index post.comment_set.count %}
 			</span>
 			{# display num likes #}
 			<span class="likes" id="like-{{ post.id }}">
-			{% like_text post.like_set.count %}
+				{% like_text post.like_set.count %}
 			</span>
-			{# let logged in user like post.  #}
-			{% if user.is_authenticated %}
-			<span>
+			<span class="post-actions">
 				<a href={% url 'comments:like' username=post.user.username post_id=post.id %} class="like-link" id="like-link-{{ post.id }}">
 				{% like_button request.user post %}
 				</a>
-			{% endif %}
-			</span>
-			{# let logged in user delete own posts. #}
-			{% if user.is_authenticated and user == post.user %}
-			<span class="delete"> | 
+				{# let logged in user delete own posts. #}
+				{% if user.is_authenticated and user == post.user %}
 				<a href={% url 'posts:delete-post' username=post.user.username post_number=post.id %} class="delete-link">Delete</a>
+				{% endif %}
 			</span>
-			{% endif %}
 		</div>
+		{% endif %}
+	</div>
 	{% endfor %}
 		<div class='pagination'>
 			<span class='page-nav'>

@@ -1,49 +1,63 @@
 a:link {
   text-decoration: none;
-  color: #547E99; }
+  color: #547E99;
+}
 
 a:visited {
   text-decoration: none;
-  color: #547E99; }
+  color: #547E99;
+}
 
 a:hover {
-  text-decoration: underline;
-  color: #E3DAF7; }
+  color: #E3DAF7;
+}
 
 nav {
   background-color: #281742;
-  font-family: Arial, Georgia, serif; }
+  font-family: Roboto Slab, Arial, Georgia, serif;
+}
 
 body {
   color: #E3DAF7;
   background-color: #281742;
-  font-family: Arial, Georgia, serif; }
+  font-family: Roboto Slab, Arial, Georgia, serif;
+}
 
 .post {
   background-color: #472A7D;
   padding: 8px;
-  margin: 8px 5px; }
+  margin: 8px 5px;
+}
 
 .comment {
   background-color: #52535E;
   padding: 8px;
-  margin: 8px 5px; }
+  margin: 8px 5px;
+}
 
 .comments {
   padding-right: 20px;
-  color: #E3DAF7; }
+  color: #E3DAF7;
+}
 
 .reply {
   color: #323137;
   font-size: 14px;
   background-color: #9A91ED;
   padding: 8px;
-  margin: 10px; }
+  margin: 10px;
+}
 
 .reply-link {
-  padding: 8px; }
+  padding: 8px;
+}
 
 #likes {
-  padding-left: 20px; }
+  padding-left: 20px;
+}
+
+.post-actions {
+  padding-left: 20px;
+}
 
 /*# sourceMappingURL=site.css.map */
