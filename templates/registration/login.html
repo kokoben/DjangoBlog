@@ -1,13 +1,17 @@
 {% extends "Blog/base.html" %}
 {% block content %}
-<form action="" method="post">
-	{% csrf_token %}
-	<table>
-	{{form.as_table}}
-	</table>
-	<input type="submit" value="Log in">
-</form>
-<form action={% url 'signup:index' %}>
-	<input type="submit" value="Sign Up">
-</form>
+<div class="card purple darken-4">
+    <div class="card-content white-text">
+		<form action="" method="post">
+			{% csrf_token %}
+			<p class="input-field label">
+				{{form.as_p}}
+			</p>
+            <button class="btn waves-effect waves-light" type="submit">Log in</button>
+		</form>
+		<form action={% url 'signup:index' %}>
+        <button class="btn waves-effect waves-light">Sign up</button>
+		</form>
+	</div>
+</div>
 {% endblock content%}

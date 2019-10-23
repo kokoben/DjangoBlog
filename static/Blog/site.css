@@ -1,3 +1,12 @@
+input, select, textarea {
+  color: #FFFFFF;
+}
+
+.input-field label {
+  color: #E3DAF7;
+  font-size: 14px;
+}
+
 a:link {
   text-decoration: none;
   color: #FFFFFF;
@@ -13,7 +22,6 @@ a:hover {
 }
 
 nav {
-  background-color: #281742;
   font-family: Roboto Slab, Arial, Georgia, serif;
 }
 

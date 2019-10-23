@@ -1,10 +1,14 @@
 {% extends 'Blog/base.html' %}
 {% block content %}
-<form action="" method ="post">
-	{% csrf_token %}
-	<table>
-	{{form.as_table}}
-	</table>
-	<input type="submit", value="Post it!">
-</form>
+<div class="card purple darken-4">
+	<div class="card-content white-text">
+		<form action="" method ="post">
+			{% csrf_token %}
+			<table class="input-field label">
+				{{form.as_table}}
+			</table>
+            <button class="btn waves-effect waves-light" type="submit"> Post it!</button>
+		</form>
+	</div>
+</div>
 {% endblock content %}
