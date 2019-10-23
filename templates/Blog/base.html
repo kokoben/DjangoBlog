@@ -13,17 +13,24 @@
 <body>
 	<div class="container">
 		<nav>
-			<a href={% url 'home:index' %}>Home</a>
-			{% if user.is_authenticated %}
-			<a href={% url 'dashboard:index' %}>Dash</a>
-			<a href={% url 'posts:index' username=user.username %}>Posts</a>
-			<a href={% url 'posts:archive' username=user.username %}>Archive</a>
-			<a href={% url 'logout' %}>Logout</a>
-			{% else %}
-			<a href={% url 'login' %}>Login </a>
-			<a href={% url 'signup:index' %}>Signup</a>
-			{% endif %}
-		</nav>	
+            <div class="nav-wrapper purple lighten-2">
+				<div class="logo-wrapper">
+					<div class="brand-logo">Ben Bloggin'</div>
+				</div>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a href={% url 'home:index' %}>Home</a></li>
+					{% if user.is_authenticated %}
+					<li><a href={% url 'dashboard:index' %}>Dash</a></li>
+					<li><a href={% url 'posts:index' username=user.username %}>Posts</a></li>
+					<li><a href={% url 'posts:archive' username=user.username %}>Archive</a></li>
+					<li><a href={% url 'logout' %}>Logout</a></li>
+					{% else %}
+					<li><a href={% url 'login' %}>Login </a></li>
+					<li><a href={% url 'signup:index' %}>Signup</a></li>
+					{% endif %}
+				</ul>
+			</div>
+		</nav>
 	</div>
 
 	<div class="container">

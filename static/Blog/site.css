@@ -1,15 +1,15 @@
 a:link {
   text-decoration: none;
-  color: #547E99;
+  color: #FFFFFF;
 }
 
 a:visited {
   text-decoration: none;
-  color: #547E99;
+  color: #FFFFFF;
 }
 
 a:hover {
-  color: #E3DAF7;
+  color: #FFFFFF;
 }
 
 nav {
@@ -21,6 +21,10 @@ body {
   color: #E3DAF7;
   background-color: #281742;
   font-family: Roboto Slab, Arial, Georgia, serif;
+}
+
+.logo-wrapper {
+    padding-left: 8px;
 }
 
 .post {
@@ -53,11 +57,11 @@ body {
 }
 
 #likes {
-  padding-left: 20px;
+  padding-left: 24px;
 }
 
 .post-actions {
-  padding-left: 20px;
+  padding-left: 24px;
 }
 
 /*# sourceMappingURL=site.css.map */
