@@ -40,50 +40,61 @@
 		{% endif %}
 	</div>
 	{% endfor %}
-		<div class='pagination'>
-			<span class='page-nav'>
-				<span> {# show the link to the first page #}
-					<a href="?page=1">&lt;&lt;</a>
-				</span>
+			<ul class='pagination'>
+				<li class="waves-effect"> {# show the link to the first page #}
+					<a href="?page=1">
+						<i class="material-icons orange white-text lighten-1">chevron_left</i>
+					</a>
+				</li>
 				{% if posts.has_previous %}
-					<a href="?page={{ posts.previous_page_number }}">&lt;</a>
+                <li class="waves-effect">
+					<a href="?page={{ posts.previous_page_number }}">
+						<i class="material-icons orange  white-text lighten-1">chevron_left</i>
+					</a>
+				</li>
 				{% endif %}
 				{% if posts.number == 2 %} {# if on page 2, show previous page (page 1) #}
-					<span>
-						<a href="?page={{ posts.previous_page_number }}">{{ posts.previous_page_number }}</a>
-					</span>
+				<li class="waves-effect">
+					<a href="?page={{ posts.previous_page_number }}">{{ posts.previous_page_number }}</a>
+				</li>
 				{% endif %}
 				{% if posts.number >= 3 %} {# if on page 3 or greater, show previous two pages #}
-					<span> 
-						<a href="?page={{ posts.previous_page_number }}">{{ previous_previous_page.number }}</a>
-					</span>
-					<span>
-						<a href="?page={{ posts.previous_page_number }}">{{ posts.previous_page_number }}</a>
-					</span>
+				<li class="waves-effect">
+					<a href="?page={{ posts.previous_page_number }}">{{ previous_previous_page.number }}</a>
+				</li>
+				<li class="waves-effect">
+					<a href="?page={{ posts.previous_page_number }}">{{ posts.previous_page_number }}</a>
+				</li>
 				{% endif %}
-				<span class='current'> {# show the current page. #}
+				<li class='current active waves-effect'>
+					{# show the current page. #}
 					{{ posts.number }}
-				</span>
+				</li>
 				{% if last_minus_current >= 2  %}
 				{# if on third to last page or earlier, show next two pages. #}
-				<span>
+				<li class="waves-effect">
 					<a href="?page={{ posts.next_page_number }}">{{ posts.next_page_number }}</a>
-				</span>
-				<span>
+				</li>
+				<li class="waves-effect">
 					<a href="?page={{ next_next_page.number }}">{{ next_next_page.number }}</a>
-				</span>
+				</li>
 				{% elif last_minus_current == 1 %}
 				{# if on second to last page, show next (last) page only. #}
-				<span>
+				<li class="waves-effect">
 					<a href="?page={{ posts.next_page_number }}">{{ posts.next_page_number }}</a>
-				</span>
+				</li>
 				{% endif %}
-			{% if posts.has_next %}
-				<a href="?page={{ posts.next_page_number }}">&gt;</a>
-			{% endif %}
-			<span> {# show the link to last page #}
-				<a href="?page={{ posts.paginator.num_pages }}">&gt;&gt;</a>
-			</span>
-		</div>
+				{% if posts.has_next %}
+				<a href="?page={{ posts.next_page_number }}">
+					<i class="material-icons orange white-text lighten-1">chevron_right</i>
+				</a>
+				{% endif %}
+				{# show the link to last page #}
+				<li class="waves-effect">
+					<a href="?page={{ posts.paginator.num_pages }}">
+						<i class="material-icons orange white-text lighten-1">chevron_right</i>
+					</a>
+				</li>
+			</ul>
 {% endif %}
 {% endblock content %}

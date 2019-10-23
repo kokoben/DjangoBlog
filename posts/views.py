@@ -40,10 +40,6 @@ def index(request, username):
     except EmptyPage:
         nextNextPage = 1
 
-        print(lastMinusCurrent)
-        print(previousPreviousPage)
-        print(nextNextPage)
-
     context = {
         'username': user,
         'posts': posts,
